@@ -1,6 +1,12 @@
 import { useContext, useMemo, useRef } from "react";
 import Head from "next/head";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  query,
+  limit,
+} from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useAuthStateHook } from "../hooks/useAuthState";
 import { AuthContext } from "./_app";
@@ -20,7 +26,7 @@ export default function ChatRoom({ messages }) {
         <title>ChatRoom</title>
       </Head>
       <section>
-        <OldMessages messages={JSON.parse(messages)} />
+        <OldMessages messages={messages} />
         <NewMessages messagesRef={messagesRef} />
         <span className="scroll" ref={spanRef}></span>
       </section>
@@ -32,13 +38,13 @@ export default function ChatRoom({ messages }) {
 export async function getServerSideProps(context) {
   let messagesArr = [];
   const messagesRef = collection(getFirestore(), "messages");
-  (await getDocs(messagesRef)).forEach((message) => {
+  (await getDocs(query(messagesRef, limit(70)))).forEach((message) => {
     messagesArr = [...messagesArr, message.data()];
   });
 
   return {
     props: {
-      messages: JSON.stringify(messagesArr),
+      messages: JSON.parse(JSON.stringify(messagesArr)),
     },
   };
 }
