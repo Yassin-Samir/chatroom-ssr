@@ -24,7 +24,6 @@ function MessageForm({ messagesRef, spanRef }) {
         console.log(error,'send message');
         return;
       }
-      console.log(data, "data");
     },
     [Message]
   );
