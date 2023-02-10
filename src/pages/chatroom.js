@@ -1,12 +1,19 @@
 import { useContext, useMemo, useRef } from "react";
 import Head from "next/head";
+import dynamic from "next/dynamic";
 import { collection, getDocs, query, limit } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useAuthStateHook } from "../hooks/useAuthState";
 import { AuthContext, firestore } from "./_app";
-import OldMessages from "../components/oldMessages";
-import NewMessages from "../components/newMessages";
-import MessageForm from "../components/form";
+const OldMessages = dynamic(() => import("../components/oldMessages"), {
+  loader: () => "Loading...",
+});
+const NewMessages = dynamic(() => import("../components/newMessages"), {
+  loader: () => "Loading...",
+});
+const MessageForm = dynamic(() => import("../components/form"), {
+  loader: () => "Loading...",
+});
 export default function ChatRoom({ messages }) {
   const { auth } = useContext(AuthContext);
   const spanRef = useRef();
