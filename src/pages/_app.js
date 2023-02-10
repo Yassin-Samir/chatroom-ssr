@@ -1,13 +1,9 @@
 import { createContext, useMemo } from "react";
-import dynamic from "next/dynamic";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import SignOut from "../components/signOut";
 import "../styles/globals.css";
-
-const SignOut = dynamic(() => import("../components/signOut"), {
-  loader: () => "Loading...",
-});
 
 const app = initializeApp({
   apiKey: "AIzaSyBv3Clx3Z8YCBxtqe89efAbsBlhtAjeavg",

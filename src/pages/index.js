@@ -1,13 +1,10 @@
 import { useEffect, useContext } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
 import Head from "next/head";
-import dynamic from "next/dynamic";
+import Image from "next/image";
+import { useAuthState } from "react-firebase-hooks/auth";
+import SignIn from "../components/signIn";
 import { useAuthStateHook } from "../hooks/useAuthState";
 import { AuthContext } from "./_app";
-
-const SignIn = dynamic(() => import("../components/signIn"), {
-  loader: () => "Loading...",
-});
 
 export default function Home() {
   const { auth } = useContext(AuthContext);
