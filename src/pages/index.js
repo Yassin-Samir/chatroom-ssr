@@ -14,6 +14,7 @@ export default function Home() {
     <>
       <Head>
         <title>Login Page</title>
+        <meta name="google-site-verification" content="kPO1Td6JI9ujjZbmjCurrhlFS8VgUKO4dn8QO_v2QMU" />
       </Head>
       <SignIn />
     </>
